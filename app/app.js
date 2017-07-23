@@ -8,17 +8,15 @@ const fs = require('fs');
 const init = (data) => {
     const app = express();
     require('./config/app.config').applyTo(app);
+    require('./config/auth.config').applyTo(app, data);
 
-    app.get('/', (req, res) => {
-        return res.render('home');
-    });
-
-    fs.readdirSync(path.join(__dirname, 'controllers/'))
+    fs.readdirSync(path.join(__dirname, 'routers/'))
         .forEach((file) => {
             const modulePath = path.join(
-                path.join(__dirname, 'controllers'),
+                path.join(__dirname, 'routers'),
                 file);
-            require(modulePath).attachTo(app, data);
+            const RouterClass = require(modulePath);
+            new RouterClass().attachTo(app, data);
         });
 
     return Promise.resolve(app);

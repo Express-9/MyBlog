@@ -1,4 +1,35 @@
-extends _shared/_master
-block body
-    h1
-        | Welcome
+.container
+  .row
+    .box
+      .col-lg-12.text-center
+        #carousel-example-generic.carousel.slide
+          // Indicators
+          ol.carousel-indicators.hidden-xs
+            li.active(data-target='#carousel-example-generic', data-slide-to='0')
+            li(data-target='#carousel-example-generic', data-slide-to='1')
+            li(data-target='#carousel-example-generic', data-slide-to='2')
+          // Wrapper for slides
+          .carousel-inner
+            .item.active
+              img.img-responsive.img-full(src='img/slide-1.jpg', alt='')
+            .item
+              img.img-responsive.img-full(src='img/slide-2.jpg', alt='')
+            .item
+              img.img-responsive.img-full(src='img/slide-3.jpg', alt='')
+          // Controls
+          a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
+            span.icon-prev
+          a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
+            span.icon-next
+        h2.brand-before
+          small Welcome to
+        hr.tagline-divider
+
+if users
+ each user in users
+  .row
+   .box
+     .col-lg-12
+       hr
+       h2.intro-text.text-center
+        strong #{user.name}

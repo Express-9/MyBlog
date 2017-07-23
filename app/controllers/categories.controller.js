@@ -1,20 +1,22 @@
 const { Router } = require('express');
 
-const attachTo = (app, data) => {
-    const apiRouter = new Router();
+class CategoriesController {
+    constructor(data) {
+        this.data = data;
+    }
 
-    apiRouter
-        .get('/', (req, res) => {
-            return;
-                // .then(() => {
-                //     return res.send();
-                // });
-        });
+    all(req, res) {
+        const categories = this.data.category.getAll();
+        res.send(categories);
+    }
 
-    app.use('/api/categories', apiRouter);
-};
-
-module.exports = { attachTo };
+    attachTo(app) {
+        const apiRouter = new Router();
+        apiRouter.get('/', this.all);
+        app.use('/api/categories', apiRouter);
+    }
+}
+module.exports = CategoriesController;
 
 // Questions
 // how to choose category

@@ -1,3 +1,5 @@
+const { ObjectID } = require('mongodb');
+
 class BaseMongoDbData {
     constructor(db, ModelClass, validator) {
         this.db = db;
@@ -25,6 +27,12 @@ class BaseMongoDbData {
             .then(() => {
                 return model;
             });
+    }
+
+    findById(id) {
+        return this.collection.findOne({
+            _id: new ObjectID(id),
+        });
     }
 
     findOrCreateBy(props) {

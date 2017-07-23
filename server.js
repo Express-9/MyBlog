@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 const async = require('./utils/async');
-const config = require('./config');
+const config = require('./config/config');
 
 async()
     .then(() => require('./db/db').init(config.connectionString))

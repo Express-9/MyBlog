@@ -1,0 +1,14 @@
+extends _shared/_master
+
+block content
+	//- != messages()
+	
+	.container
+		form#contact(action='/blogs/' + currentUserName + '/articles', method='post')
+			h3 Create new category 
+			fieldset
+				input(name='name', placeholder='Category Name', type='text', tabindex='1', required='')
+			fieldset
+				input#url(type='text', name='url', placeholder='Image url', required='')
+			fieldset
+				button#contact-submit(name='submit', type='submit', data-submit='...Sending') Submit

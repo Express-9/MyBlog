@@ -22,12 +22,19 @@ html(lang='en')
 
 	.container
 		.header
-			.brand #{currentUserName}
+			a.intro-text.text-center(href='/' style='color: white') My Blog
+			select#users_select(name='users_select' tabindex='1', required='')
 		.body
-			if isOwnerLoggedIn
-				li
-					a.btn.btn-default(href='') Log Out
 			+nav()
+			.row
+				.box
+					.col-lg-12.text-center
+						h2.brand-before
+						| Welcome to
+						h1.brand-name #{currentUserName}
+						hr.tagline-divider
+			if isOwnerLoggedIn
+				a.btn.btn-default(href='/login/logout') Log Out
 			block content
 		.footer
 			+foot()
@@ -38,3 +45,4 @@ html(lang='en')
 		script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
 
 		script(src="/libs/toastr/build/toastr.min.js")
+		script(src="/static/js/loadUsers.js")

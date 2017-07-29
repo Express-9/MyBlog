@@ -13,6 +13,12 @@ class PostController {
         });
     }
 
+    getPostsAPI(req, res) {
+        this.data.post.getAllForUser(req.params.user).then((posts) => {
+            res.send(posts);
+        });
+    }
+
     getPostForm(req, res) {
         res.render('blogs/createPost', {
             currentUserName: req.params.user,
@@ -43,6 +49,12 @@ class PostController {
                 isOwnerLoggedIn: (req.user ?
                     req.params.user === req.user.name : false),
             });
+        });
+    }
+    viewPostAPI(req, res) {
+        this.data.post.findById(req.params.id)
+        .then((post) => {
+            res.send(post);
         });
     }
     getEditForm(req, res) {

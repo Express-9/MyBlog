@@ -1,15 +1,6 @@
 extends _shared/_master
 
 block content
-
-  .container
-    .row
-      .box
-        .col-lg-12.text-center
-          h2.brand-before
-            | Welcome to
-          h1.brand-name #{currentUserName}
-          hr.tagline-divider
   if posts
     each post in posts
       .row

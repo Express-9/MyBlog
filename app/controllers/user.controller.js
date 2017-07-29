@@ -12,15 +12,14 @@ class UserController {
     showRegister(req, res) {
         res.render('register');
     }
+
     register(req, res) {
         const bodyUser = req.body;
-
         this.data.user.findByUsername(bodyUser.name)
             .then((dbUser) => {
                 if (dbUser) {
                     throw new Error('User already exists');
                 }
-
                 return this.data.user.create(bodyUser);
             })
             .then((dbUser) => {

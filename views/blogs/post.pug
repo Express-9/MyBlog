@@ -13,6 +13,8 @@ block content
   .row
       .box
         .col-lg-12
+          if isOwnerLoggedIn
+            a.btn.btn-default(href='/blogs/' + currentUserName + '/post/' + post.category + '/' + post._id + '/edit/form') Edit
           hr
           h1.intro-text.text-center
             strong #{post.header}

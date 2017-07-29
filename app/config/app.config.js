@@ -19,7 +19,7 @@ const applyTo = (app) => {
     app.use('/static', express.static(path.join(__dirname, '../../static/')));
 
     app.use(cookieParser('keyboard cat'));
-    app.use(session({ cookie: { maxAge: 60000 } }));
+    app.use(session({ cookie: { maxAge: 30*60*1000 } }));
 
     app.use(require('connect-flash')());
     app.use((req, res, next) => {

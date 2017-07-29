@@ -51,9 +51,13 @@ class BaseMongoDbData {
     }
 
     updateById(model) {
-        return this.collection.updateOne({
-            _id: model._id,
-        }, model);
+        const id = model._id;
+        delete model._id;
+        console.log(id);
+        return this.collection.updateOne(
+            { _id: new ObjectID(id) },
+            { $set: model }
+        );
     }
 
     _isModelValid(model) {

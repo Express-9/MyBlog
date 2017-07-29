@@ -24,14 +24,20 @@ class PostRouter {
             }))
             .post('/blogs/:user/post', protect((req, res) => {
                 controller.createPost(req, res);
-            }));
-            // .get('/blogs/:user/post/:category/:id', protect((req, res) => {
-            //     controller.viewPost(req, res);
-            // }))
-            // .post('/blogs/:user/post/:category/:id/edit',
-            // protect((req, res) => {
-            //     controller.editPost(req, res);
-            // }));
+            }))
+            .get('/blogs/:user/post/:category/:id', (req, res) => {
+                controller.viewPost(req, res);
+            })
+            .get('/blogs/:user/post/:category/:id/edit/form',
+                protect((req, res) => {
+                    controller.getEditForm(req, res);
+                })
+            )
+            .post('/blogs/:user/post/:category/:id/edit',
+                protect((req, res) => {
+                    controller.editPost(req, res);
+                })
+            );
     }
 }
 

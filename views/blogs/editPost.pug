@@ -1,0 +1,20 @@
+extends _shared/_master
+
+block content
+	//- != messages()
+	
+	.container
+		form#contact(action='/blogs/' + currentUserName + '/post/' + post.category + '/' + post._id + '/edit', method='post')
+			h3 Create your post 
+			input(name='_id', type='hidden', value=post._id)
+			fieldset
+				select(name='category' tabindex='1', required='')
+					//each category in categories
+					option
+						| Beauty
+			fieldset
+				input(name='header', type='text', tabindex='2', required='', value=post.header)
+			fieldset
+				textarea(name='text', tabindex='3', required='') #{post.text}
+			fieldset
+				button#contact-submit(name='submit', type='submit', data-submit='...Sending') Submit

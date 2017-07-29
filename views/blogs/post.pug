@@ -1,0 +1,22 @@
+extends _shared/_master
+
+block content
+
+  .container
+    .row
+      .box
+        .col-lg-12.text-center
+          h2.brand-before
+            | Welcome to
+          h1.brand-name #{currentUserName}
+          hr.tagline-divider
+  .row
+      .box
+        .col-lg-12
+          hr
+          h1.intro-text.text-center
+            strong #{post.header}
+          hr
+          img.img-responsive.img-border.img-left(src='', alt='')
+          hr.visible-xs
+          p #{post.text}

@@ -1,7 +1,7 @@
 const BaseMongoDbData = require('./base/base.data');
 const User = require('../models/user.model');
 
-class UserDao extends BaseMongoDbData {
+class UserData extends BaseMongoDbData {
     constructor(db) {
         super(db, User);
     }
@@ -9,7 +9,7 @@ class UserDao extends BaseMongoDbData {
     findByUsername(name) {
         return this
             .filterBy({ name: new RegExp(name, 'i') })
-            .then(([user]) => user);
+            .then((users) => users[0]);
     }
     checkPassword(username, password) {
         return this.findByUsername(username)
@@ -26,4 +26,4 @@ class UserDao extends BaseMongoDbData {
             });
     }
 }
-module.exports = UserDao;
+module.exports = UserData;

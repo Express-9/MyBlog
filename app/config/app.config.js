@@ -16,6 +16,8 @@ const applyTo = (app) => {
 
     app.use('/libs', express.static(libsPath));
 
+    app.use('/static', express.static(path.join(__dirname, '../../static/')));
+
     app.use(cookieParser('keyboard cat'));
     app.use(session({ cookie: { maxAge: 60000 } }));
 

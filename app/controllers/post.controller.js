@@ -24,15 +24,6 @@ class PostController {
     createPost(req, res) {
         const bodyPost = req.body;
         bodyPost.user = req.params.user;
-        if (!req.user) {
-            return Promise.resolve()
-                .then(() => {
-                    req.flash(
-                        'err',
-                        { message: 'You need authentication' }
-                    );
-                });
-        }
         return this.data.post.create(bodyPost)
             .then((post) => {
                 return res.redirect('/blogs/'
@@ -43,12 +34,51 @@ class PostController {
                 return res.redirect('/blogs/:user/post/form');
             });
     }
-    // viewPost(req, res) {
-    //     this.data.post.getPostForUser(req.post._id).then((post) => {
-    //     res.render('blogs/post', {
-    //         post,
-    //         });
-    //     });
-    // }
+    viewPost(req, res) {
+        this.data.post.findById(req.params.id)
+        .then((post) => {
+            res.render('blogs/post', {
+                post,
+                currentUserName: req.params.user,
+                isOwnerLoggedIn: (req.user ?
+                    req.params.user === req.user.name : false),
+            });
+        });
+    }
+    getEditForm(req, res) {
+        this.data.post.findById(req.params.id)
+        .then((post) => {
+            res.render('blogs/editPost', {
+                post,
+                currentUserName: req.params.user,
+                isOwnerLoggedIn: (req.user ?
+                    req.params.user === req.user.name : false),
+            });
+        });
+    }
+    editPost(req, res) {
+        const bodyPost = req.body;
+        const id = bodyPost._id;
+        bodyPost.user = req.params.user;
+        return this.data.post.updateById(bodyPost)
+            .then((post) => {
+                return res.redirect('/blogs/'
+                    + encodeURIComponent(req.params.user) +
+                    '/post/' +
+                    bodyPost.category +
+                    '/' +
+                    id);
+            })
+            .catch((err) => {
+                req.flash('error', err);
+                return res.redirect('/blogs/' +
+                    encodeURIComponent(req.params.user) +
+                    '/post/' +
+                    bodyPost.category +
+                    '/' +
+                    id +
+                    '/edit/form');
+            });
+    }
 }
 module.exports = PostController;

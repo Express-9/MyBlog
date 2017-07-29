@@ -8,7 +8,14 @@ class UserController {
             res.render('home', { users });
         });
     }
-
+    getUsers(req, res) {
+        this.data.user.getAll().then((users) => {
+            const names = users.map((user) => {
+                return user.name;
+            });
+            res.send(names);
+        });
+    }
     showRegister(req, res) {
         res.render('register');
     }

@@ -15,9 +15,10 @@ class AuthRouter {
             passport.authenticate('local'),
             function(req, res) {
                 res.redirect('/blogs/' + encodeURIComponent(req.user.name));
-            })
-        .post('/logout', (req, res) => {
-            return controller.logout(req, res);
+            }
+        )
+        .get('/logout', (req, res) => {
+            controller.logout(req, res);
         });
 
         app.use('/login', authRouter);

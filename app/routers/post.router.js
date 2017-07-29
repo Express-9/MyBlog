@@ -37,7 +37,13 @@ class PostRouter {
                 protect((req, res) => {
                     controller.editPost(req, res);
                 })
-            );
+            )
+            .get('/api/blogs/:user/posts', (req, res) => {
+                controller.getPostsAPI(req, res);
+            })
+            .get('/api/blogs/:user/posts/:id', (req, res) => {
+                controller.viewPostAPI(req, res);
+            });
     }
 }
 

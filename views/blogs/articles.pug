@@ -1,0 +1,17 @@
+extends _shared/_master
+
+block content
+
+	.container
+		if isOwnerLoggedIn
+			a.btn.btn-default(href='/blogs/' + currentUserName + '/articles/form') Add new Category
+
+		if categories
+			each category in categories
+				.container-cat
+					.row(style='')
+						.col-md-3
+							h1(style='text-align: center')
+								a(href='/blogs/' + currentUserName + '/articles/' + category.name, name='category', style= 'text-align:center') #{category.name}
+							hr
+							img.img-responsive(src=category.url, alt='', style='')

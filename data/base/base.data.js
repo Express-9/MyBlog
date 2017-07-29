@@ -19,6 +19,10 @@ class BaseMongoDbData {
             .toArray();
     }
 
+    getAllForUser(user) {
+        return this
+            .filterBy({ user: user });
+    }
     create(model) {
         if (!this._isModelValid(model)) {
             return Promise.reject('Validation failed!');
@@ -53,13 +57,17 @@ class BaseMongoDbData {
     updateById(model) {
         const id = model._id;
         delete model._id;
-        console.log(id);
         return this.collection.updateOne(
             { _id: new ObjectID(id) },
             { $set: model }
         );
     }
-
+    deleteById(id) {
+        return this.collection.remove(
+            { _id: new ObjectID(id) },
+            { justOne: true }
+        );
+    }
     _isModelValid(model) {
         if ('undefined' === typeof this.validator ||
             'function' !== typeof this.validator.isValid) {

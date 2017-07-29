@@ -11,6 +11,9 @@ class UserRouter {
         app.post('/register', (req, res) => {
             controller.register(req, res);
         });
+        app.get('/api/users', (req, res) => {
+            controller.getUsers(req, res);
+        });
     }
 }
 

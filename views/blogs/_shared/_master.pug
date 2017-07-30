@@ -33,8 +33,6 @@ html(lang='en')
 						| Welcome to
 						h1.brand-name #{currentUserName}
 						hr.tagline-divider
-			if isOwnerLoggedIn
-				a.btn.btn-default(href='/login/logout') Log Out
 			block content
 		.footer
 			+foot()

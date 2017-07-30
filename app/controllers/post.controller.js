@@ -20,10 +20,13 @@ class PostController {
     }
 
     getPostForm(req, res) {
-        res.render('blogs/createPost', {
-            currentUserName: req.params.user,
-            isOwnerLoggedIn: (req.user ?
-                req.params.user === req.user.name : false),
+        this.data.category.getAllForUser(req.params.user).then((categories) => {
+            res.render('blogs/createPost', {
+                categories,
+                currentUserName: req.params.user,
+                isOwnerLoggedIn: (req.user ?
+                    req.params.user === req.user.name : false),
+            });
         });
     }
 
@@ -42,31 +45,31 @@ class PostController {
     }
     viewPost(req, res) {
         this.data.post.findById(req.params.id)
-        .then((post) => {
-            res.render('blogs/post', {
-                post,
-                currentUserName: req.params.user,
-                isOwnerLoggedIn: (req.user ?
-                    req.params.user === req.user.name : false),
+            .then((post) => {
+                res.render('blogs/post', {
+                    post,
+                    currentUserName: req.params.user,
+                    isOwnerLoggedIn: (req.user ?
+                        req.params.user === req.user.name : false),
+                });
             });
-        });
     }
     viewPostAPI(req, res) {
         this.data.post.findById(req.params.id)
-        .then((post) => {
-            res.send(post);
-        });
+            .then((post) => {
+                res.send(post);
+            });
     }
     getEditForm(req, res) {
         this.data.post.findById(req.params.id)
-        .then((post) => {
-            res.render('blogs/editPost', {
-                post,
-                currentUserName: req.params.user,
-                isOwnerLoggedIn: (req.user ?
-                    req.params.user === req.user.name : false),
+            .then((post) => {
+                res.render('blogs/editPost', {
+                    post,
+                    currentUserName: req.params.user,
+                    isOwnerLoggedIn: (req.user ?
+                        req.params.user === req.user.name : false),
+                });
             });
-        });
     }
     editPost(req, res) {
         const bodyPost = req.body;

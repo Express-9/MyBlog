@@ -1,19 +1,18 @@
 extends _shared/_master
 
 block content
-    .box
-        form#contact(action='', method='post')
-            h3 MyBlog Contact Form
-            fieldset
-            input(placeholder='Your name', type='text', tabindex='1', required='', autofocus='')
-            fieldset
-            input(placeholder='Your Email Address', type='email', tabindex='2', required='')
-            fieldset
-            input(placeholder='Your Phone Number (optional)', type='tel', tabindex='3', required='')
-            fieldset
-            input(placeholder='Your Web Site (optional)', type='url', tabindex='4', required='')
-            fieldset
-            textarea(placeholder='Type your message here....', tabindex='5', required='')
-            fieldset
-            button#contact-submit(name='submit', type='submit', data-submit='...Sending') Submit
+    form#contact(action='', method='post')
+        h3 MyBlog Contact Form
+        fieldset
+        input(placeholder='Your name', type='text', tabindex='1', required='', autofocus='')
+        fieldset
+        input(placeholder='Your Email Address', type='email', tabindex='2', required='')
+        fieldset
+        input(placeholder='Your Phone Number (optional)', type='tel', tabindex='3', required='')
+        fieldset
+        input(placeholder='Your Web Site (optional)', type='url', tabindex='4', required='')
+        fieldset
+        textarea(placeholder='Type your message here....', tabindex='5', required='')
+        fieldset
+        button#contact-submit(name='submit', type='submit', data-submit='...Sending') Submit
 

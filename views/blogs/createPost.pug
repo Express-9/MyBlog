@@ -8,11 +8,12 @@ block content
 			h3 Create your post 
 			fieldset
 				select(name='category' tabindex='1', required='')
-					//each category in categories
-					option
-						| Beauty
+					each category in categories
+						option #{category.name}
 			fieldset
 				input(name='header', placeholder='Header', type='text', tabindex='2', required='')
+			fieldset
+				input#url(type='text', name='url', placeholder='Post url', required='')
 			fieldset
 				textarea(name='text', placeholder='Type your text here....', tabindex='3', required='')
 			fieldset

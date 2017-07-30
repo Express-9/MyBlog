@@ -3,15 +3,15 @@ extends _shared/_master
 block content
   if posts
     each post in posts
-      .row
-        .box
+      .container-cat
+        .row
           .col-lg-12
             hr
             a.intro-text.text-center(href='/blogs/' + currentUserName + '/post/' + post.category + '/' + post._id)
               strong #{post.header}
             hr
-            img.img-responsive.img-border.img-left(src='', alt='')
+            .img-container
+              img.img-responsive.img-border.img-left(src=post.url, alt='')
             hr.visible-xs
-            p #{post.text}
-            
+
 

@@ -5,7 +5,7 @@ block content
 	
 	.container
 		form#contact(action='/blogs/' + currentUserName + '/post/' + post.category + '/' + post._id + '/edit', method='post')
-			h3 Create your post 
+			h3 Edit your post 
 			input(name='_id', type='hidden', value=post._id)
 			fieldset
 				select(name='category' tabindex='1', required='')

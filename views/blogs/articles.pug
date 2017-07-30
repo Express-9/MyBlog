@@ -9,9 +9,10 @@ block content
 		if categories
 			each category in categories
 				.container-cat
-					.row(style='')
+					.row
 						.col-md-3
 							h1(style='text-align: center')
 								a(href='/blogs/' + currentUserName + '/articles/' + category.name, name='category', style= 'text-align:center') #{category.name}
 							hr
-							img.img-responsive(src=category.url, alt='', style='')
+							.img-container
+								img.img-responsive(src=category.url, alt='', style='')

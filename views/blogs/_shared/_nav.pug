@@ -21,5 +21,6 @@ mixin nav()
 					if isOwnerLoggedIn
 						li
 							a(href='/blogs/' + currentUserName + '/post/form') Create Post
-							//- a(href='') Log Out
+						li
+							a(href='/login/logout') Log Out
 					

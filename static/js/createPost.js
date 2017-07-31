@@ -1,0 +1,1 @@
+$.post('/api/blogs/demo/posts', {header: 'testing api', text: 'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomethingsomethingsomethingsomethingsomethingsomething', category : 'GetFit', url: "http://google.com"});

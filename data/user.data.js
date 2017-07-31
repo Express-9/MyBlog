@@ -1,3 +1,4 @@
+const encryptor = require('../utils/encryptor');
 const BaseMongoDbData = require('./base/base.data');
 const User = require('../models/user.model');
 
@@ -11,18 +12,20 @@ class UserData extends BaseMongoDbData {
             .filterBy({ name: new RegExp(name, 'i') })
             .then((users) => users[0]);
     }
-    checkPassword(username, password) {
+    checkPassword(username, password, done) {
         return this.findByUsername(username)
             .then((user) => {
                 if (!user) {
-                    throw new Error('Invalid user');
+                    return done(null, false,
+                        { message: 'Incorrect username or password!' });
                 }
 
-                if (user.password !== password) {
-                    throw new Error('Invalid password');
+                if (user.password !== encryptor.encrypt(password)) {
+                    return done(null, false,
+                        { message: 'Incorrect username or password!' });
                 }
 
-                return true;
+                return done(null, user);
             });
     }
 }

@@ -4,11 +4,14 @@ block home
   a.btn.btn-default(href='/register/form') Register
   a.btn.btn-default(href='/login/form') Login
   
-  .single.category
-    h3.side-title Find your favorite blog:
-      hr
-      if users
-        ul.list-unstyled
-          each user in users
-            li
-              a.user(href='/blogs/' + user.name) #{user.name}
+  .container
+    .row
+      .col-lg-12
+        .single.category
+          h3.side-title Find your favorite blog:
+            hr
+            if users
+              ul.list-unstyled
+                each user in users
+                  li
+                    a.user(href='/blogs/' + user.name) #{user.name}

@@ -7,16 +7,7 @@ const config = require('../../config/config');
 
 const applyTo = (app, data) => {
     passport.use(new Strategy((username, password, done) => {
-        data.user.checkPassword(username, password)
-            .then(() => {
-                return data.user.findByUsername(username);
-            })
-            .then((user) => {
-                done(null, user);
-            })
-            .catch((err) => {
-                done(err);
-            });
+        data.user.checkPassword(username, password, done);
     }));
 
     app.use(session({
@@ -41,10 +32,7 @@ const applyTo = (app, data) => {
     });
 
     app.use((req, res, next) => {
-        res.locals = {
-            user: req.user,
-        };
-
+        res.locals.user = req.user;
         next();
     });
 };

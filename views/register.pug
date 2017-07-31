@@ -1,6 +1,7 @@
 extends _base
 
 block register
+  != messages()
   .container
     .row
       .col-md-6.col-md-offset-3
@@ -23,4 +24,4 @@ block register
                   .form-group
                     .row
                       .col-sm-6.col-sm-offset-3
-                        input#login-submit.form-control.btn.btn-login(type='submit', name='login-submit', tabindex='4', value='Register')
+                        input#login-submit.form-control.btn.btn-login(type='submit', tabindex='4', value='Register')

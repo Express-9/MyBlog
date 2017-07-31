@@ -1,7 +1,7 @@
 extends _shared/_master
 
 block content
-	//- != messages()
+	!= messages()
 	
 	.container
 		form#contact(action='/blogs/' + currentUserName + '/post/' + post.category + '/' + post._id + '/edit', method='post')
@@ -9,9 +9,8 @@ block content
 			input(name='_id', type='hidden', value=post._id)
 			fieldset
 				select(name='category' tabindex='1', required='')
-					//each category in categories
-					option
-						| Beauty
+					each category in categories
+						option #{category.name}
 			fieldset
 				input(name='header', type='text', tabindex='2', required='', value=post.header)
 			fieldset

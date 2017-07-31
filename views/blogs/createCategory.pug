@@ -1,8 +1,7 @@
 extends _shared/_master
 
 block content
-	//- != messages()
-	
+	!= messages()
 	.container
 		form#contact(action='/blogs/' + currentUserName + '/articles', method='post')
 			h3 Create new category 

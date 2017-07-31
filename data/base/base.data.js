@@ -1,10 +1,10 @@
 const { ObjectID } = require('mongodb');
 
 class BaseMongoDbData {
-    constructor(db, ModelClass, validator) {
+    constructor(db, ModelClass) {
         this.db = db;
         this.ModelClass = ModelClass;
-        this.validator = validator;
+        this.validator = new ModelClass();
         this.collectionName = this._getCollectionName();
         this.collection = this.db.collection(this.collectionName);
     }
@@ -24,8 +24,10 @@ class BaseMongoDbData {
             .filterBy({ user: user });
     }
     create(model) {
-        if (!this._isModelValid(model)) {
-            return Promise.reject('Validation failed!');
+        try {
+            this._isModelValid(model);
+        } catch (err) {
+            return Promise.reject('Validation failed: ' + err);
         }
         return this.collection.insert(model)
             .then(() => {
@@ -55,6 +57,11 @@ class BaseMongoDbData {
     }
 
     updateById(model) {
+        try {
+         this._isModelValid(model);
+        } catch (err) {
+            return Promise.reject('Validation failed: ' + err);
+        }
         const id = model._id;
         delete model._id;
         return this.collection.updateOne(

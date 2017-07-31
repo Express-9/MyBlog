@@ -8,18 +8,21 @@ class AuthRouter {
         const controller = new AuthController(data);
         const authRouter = new Router();
         authRouter
-        .get('/form', (req, res) => {
-            controller.showLogin(req, res);
-        })
-        .post('/',
-            passport.authenticate('local'),
+            .get('/form', (req, res) => {
+                controller.showLogin(req, res);
+            })
+            .post('/',
+            passport.authenticate('local', {
+                failureRedirect: '/login/form',
+                failureFlash: true,
+            }),
             function(req, res) {
                 res.redirect('/blogs/' + encodeURIComponent(req.user.name));
             }
-        )
-        .get('/logout', (req, res) => {
-            controller.logout(req, res);
-        });
+            )
+            .get('/logout', (req, res) => {
+                controller.logout(req, res);
+            });
 
         app.use('/login', authRouter);
     }

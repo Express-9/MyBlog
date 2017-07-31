@@ -40,7 +40,8 @@ class PostController {
             })
             .catch((err) => {
                 req.flash('error', err);
-                return res.redirect('/blogs/:user/post/form');
+                return res.redirect('/blogs/'
+                    + encodeURIComponent(req.params.user) + '/post/form');
             });
     }
     viewPost(req, res) {
@@ -61,15 +62,18 @@ class PostController {
             });
     }
     getEditForm(req, res) {
-        this.data.post.findById(req.params.id)
-            .then((post) => {
-                res.render('blogs/editPost', {
-                    post,
-                    currentUserName: req.params.user,
-                    isOwnerLoggedIn: (req.user ?
-                        req.params.user === req.user.name : false),
+        this.data.category.getAllForUser(req.params.user).then((categories) => {
+            this.data.post.findById(req.params.id)
+                .then((post) => {
+                    res.render('blogs/editPost', {
+                        categories,
+                        post,
+                        currentUserName: req.params.user,
+                        isOwnerLoggedIn: (req.user ?
+                            req.params.user === req.user.name : false),
+                    });
                 });
-            });
+        });
     }
     editPost(req, res) {
         const bodyPost = req.body;

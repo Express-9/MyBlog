@@ -1,7 +1,7 @@
 extends _shared/_master
 
 block content
-	//- != messages()
+	!= messages()
 	
 	.container
 		form#contact(action='/blogs/' + currentUserName + '/post', method='post')

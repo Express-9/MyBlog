@@ -1,3 +1,5 @@
+const encryptor = require('../../utils/encryptor');
+
 class UserController {
     constructor(data) {
         this.data = data;
@@ -22,6 +24,7 @@ class UserController {
 
     register(req, res) {
         const bodyUser = req.body;
+        bodyUser.password = encryptor.encrypt(bodyUser.password);
         this.data.user.findByUsername(bodyUser.name)
             .then((dbUser) => {
                 if (dbUser) {
@@ -35,6 +38,7 @@ class UserController {
             })
             .catch((err) => {
                 req.flash('error', err);
+                res.redirect('/register/form');
             });
     }
 }

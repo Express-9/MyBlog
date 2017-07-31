@@ -43,6 +43,13 @@ class PostRouter {
             })
             .get('/api/blogs/:user/posts/:id', (req, res) => {
                 controller.viewPostAPI(req, res);
+            })
+            .post('/api/blogs/:user/posts', (req, res) => {
+                if (!req.user || req.user.name !== req.params.user) {
+                    res.status(401).send('Unauthorized');
+                } else {
+                    controller.createPostAPI(req, res);
+                }
             });
     }
 }

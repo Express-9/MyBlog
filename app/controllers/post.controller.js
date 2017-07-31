@@ -44,6 +44,14 @@ class PostController {
                     + encodeURIComponent(req.params.user) + '/post/form');
             });
     }
+    createPostAPI(req, res) {
+        const bodyPost = req.body;
+        bodyPost.user = req.params.user;
+        return this.data.post.create(bodyPost)
+            .then((post) => {
+                return res.send('Created');
+            });
+    }
     viewPost(req, res) {
         this.data.post.findById(req.params.id)
             .then((post) => {
